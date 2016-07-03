@@ -46,3 +46,7 @@ group :development do
 end
 
 gem 'doorkeeper'
+gem 'rails_multitenant'
+gem 'rspec-rails'
+gem 'factory_girl_rails'
+gem 'pry'
