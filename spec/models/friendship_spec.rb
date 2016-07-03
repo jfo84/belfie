@@ -5,7 +5,7 @@ describe Friendship do
   describe 'creates a friendship via a request' do
     let(:sender) { create(:user) }
     let(:receiver) { create(:user) }
-    let(:request) { create(:friendship_request, sender_id: sender.id, receiver_id: receiver.id) }
+    let(:request) { create(:friendship_request, sender: sender, receiver: receiver) }
 
     it 'accepts the request' do
       request.accept

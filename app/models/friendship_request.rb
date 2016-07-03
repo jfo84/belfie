@@ -11,6 +11,6 @@ class FriendshipRequest < ActiveRecord::Base
   private
 
   def create_friendship
-    sender.friendships << receiver_id  if accepted?
+    sender.friendships << receiver  if accepted?
   end
 end
