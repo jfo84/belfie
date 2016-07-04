@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Friendship do
 
   describe 'creates a friendship via a request' do
-    let(:request) { create(:request_with_users) }
+    let(:request) { create(:friendship_request) }
     let(:sender) { request.sender }
     let(:receiver) { request.receciver }
 

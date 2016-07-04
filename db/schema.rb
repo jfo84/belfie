@@ -32,14 +32,12 @@ ActiveRecord::Schema.define(version: 20160704180221) do
 
   add_index "friendship_requests", ["account_id"], name: "index_friendship_requests_on_account_id", using: :btree
 
-  create_table "friendships", force: :cascade do |t|
-    t.integer  "account_id", null: false
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "friendships", id: false, force: :cascade do |t|
+    t.integer  "sender_user_id"
+    t.integer  "receiver_user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
-
-  add_index "friendships", ["account_id"], name: "index_friendships_on_account_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.integer  "account_id", null: false
@@ -92,13 +90,15 @@ ActiveRecord::Schema.define(version: 20160704180221) do
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "account_id"
+    t.integer  "account_id",    null: false
     t.string   "name"
     t.string   "email"
     t.integer  "friendship_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "users", ["account_id"], name: "index_users_on_account_id", using: :btree
 
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"

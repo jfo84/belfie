@@ -1,8 +1,8 @@
 class CreateFriendships < ActiveRecord::Migration
   def change
-    create_table :friendships do |t|
-      t.belongs_to :account, index: true, null: false
-      t.belongs_to :user
+    create_table :friendships, :force => true, :id => false do |t|
+      t.integer :sender_user_id
+      t.integer :receiver_user_id
       t.timestamps null: false
     end
   end
