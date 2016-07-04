@@ -8,12 +8,5 @@ FactoryGirl.define do
     accepted? false
     association :sender, factory: :user
     association :receiver, factory: :user
-    # factory :request_with_users do
-    #   after(:create) do |request|
-    #     create(:user, )
-    #     request.sender = FactoryGirl.create(:user)
-    #     request.receiver = FactoryGirl.create(:user)
-    #   end
-    # end
   end
 end

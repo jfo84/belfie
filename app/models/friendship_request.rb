@@ -3,8 +3,8 @@ class FriendshipRequest < ActiveRecord::Base
 
   multitenant_on :account_id
   after_save :create_friendship
-  belongs_to :sender, :class_name => 'User'
-  belongs_to :receiver, :class_name => 'User'
+  belongs_to :sender, :class_name => :User
+  belongs_to :receiver, :class_name => :User
 
   def accept
     update_attributes(accepted?: true)
@@ -13,6 +13,9 @@ class FriendshipRequest < ActiveRecord::Base
   private
 
   def create_friendship
-    sender.friendships << receiver if accepted?
+    if accepted?
+      sender.users << receiver
+      receiver.users << sender
+    end
   end
 end
