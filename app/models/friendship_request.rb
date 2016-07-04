@@ -1,8 +1,10 @@
 class FriendshipRequest < ActiveRecord::Base
   include RailsMultitenant::MultitenantModel
 
-  multitenant_on :sender_id
+  multitenant_on :account_id
   after_save :create_friendship
+  has_one :sender
+  has_one :receiver
 
   def accept
     update_attributes(accepted?: true)

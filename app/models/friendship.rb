@@ -1,5 +1,5 @@
 class Friendship < ActiveRecord::Base
   include RailsMultitenant::MultitenantModel
 
-  multitenant_on :user_id
+  multitenant_on :account_id
 end
