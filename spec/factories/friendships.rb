@@ -4,7 +4,7 @@
 
 FactoryGirl.define do
   factory :friendship_request do
-    account_id { Account.first.id }
+    account_id { Account.current.id }
     accepted? false
     association :sender, factory: :user
     association :receiver, factory: :user
