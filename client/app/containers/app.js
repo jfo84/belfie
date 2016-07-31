@@ -1,10 +1,11 @@
-import React, { Component, StatusBarIOS } from 'react-native';
+import React, { Component } from 'react';
+import { StatusBarIOS } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import * as reducers from '../reducers';
-import Nav from './Nav';
+import Nav from './nav';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);

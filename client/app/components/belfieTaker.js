@@ -1,10 +1,7 @@
-import React, {
-  Component,
-  View,
-  Text
-} from 'react-native';
+import React, { Component } from 'react';
+import View from 'react-native';
 
-import Camera from './Camera';
+import Camera from './camera';
 
 export default class BelfieTaker extends Component {
   constructor(props) {

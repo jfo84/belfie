@@ -1,10 +1,10 @@
-import React, {
-  Component,
+import React, { Component } from 'react';
+import {
   TouchableOpacity,
   StyleSheet,
   Text,
   View,
-  NavigatorIOS,
+  Navigator,
   StatusBarIOS,
   ActivityIndicatorIOS,
 } from 'react-native';
@@ -14,8 +14,8 @@ import { connect } from 'react-redux';
 
 import * as friendActions from '../actions/friendActions';
 
-import BelfieTaker from '../components/BelfieTaker';
-import FriendSelector from '../components/FriendSelector';
+import BelfieTaker from '../components/belfieTaker';
+import FriendSelector from '../components/friendSelector';
 
 var styles = StyleSheet.create({
   navBar: {
@@ -94,8 +94,6 @@ class Nav extends Component {
 
   render() {
     const loader = (
-      this.props.state.type.isFetching
-    ) ? (
       <View style={{position: 'absolute', right: 0, left: 0, bottom: 0, top: 0, alignItems: 'center', justifyContent: 'center'}}>
         <View style={{height: 100, width: 100, borderRadius: 10, backgroundColor: 'rgba(0, 0, 0, 0.6)'}}>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -103,15 +101,15 @@ class Nav extends Component {
           </View>
         </View>
       </View>
-    ) : null;
+    );
 
     return (
       <View style={{flex: 1}}>
-        <NavigatorIOS
+        <Navigator
           style={{flex: 1}}
           initialRoute={this.state.currentRoute}
           navigationBar={
-            <NavigatorIOS.NavigationBar
+            <Navigator.NavigationBar
               routeMapper={NavigationBarRouteMapper}
               style={styles.navBar}
             />

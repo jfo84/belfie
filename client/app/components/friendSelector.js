@@ -1,10 +1,7 @@
-import React, {
-  Component,
-  View,
-  Text
-} from 'react-native';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 
-import FriendList from '../components/FriendList';
+import FriendList from '../components/friendList';
 
 export default class FriendSelector extends Component {
   constructor(props) {
