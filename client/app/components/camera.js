@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from 'react-native';
 import RNCamera from 'react-native-camera';
 
@@ -23,7 +23,7 @@ class Camera extends Component {
           <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
         </RNCamera>
       </View>
-    );
+    )
   }
 
   takePicture() {

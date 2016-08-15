@@ -12,15 +12,11 @@ const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 
 export default class App extends Component {
-  componentDidMount() {
-    StatusBarIOS.setStyle('light-content');
-  }
-
   render() {
     return (
       <Provider store={store}>
         <Nav />
       </Provider>
-    );
+    )
   }
 }

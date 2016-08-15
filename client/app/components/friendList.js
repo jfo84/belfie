@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {
+  View,
+} from 'react-native';
 
 import Friend from './friend';
 
@@ -18,6 +20,6 @@ export default class FriendList extends Component {
         <View style={{flex: 1}}>
           {friendsList}
         </View>
-      );
+      )
     }
 }

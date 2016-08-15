@@ -112,8 +112,7 @@ class Nav extends Component {
             <Navigator.NavigationBar
               routeMapper={NavigationBarRouteMapper}
               style={styles.navBar}
-            />
-          }
+            />}
           renderScene={(route, navigator) => {
             switch (route.name) {
               case 'belfie':
@@ -121,12 +120,10 @@ class Nav extends Component {
                 break;
               default:
                 break;
-            }
-          }}
-        />
+            }}} />
         {loader}
       </View>
-    );
+    )
   }
 }
 

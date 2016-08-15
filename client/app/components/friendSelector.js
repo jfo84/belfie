@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {
+  View,
+  StyleSheet,
+} from 'react-native';
 
 import FriendList from '../components/friendList';
+
+var styles = StyleSheet.create({
+  friendList: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+});
 
 export default class FriendSelector extends Component {
   constructor(props) {
@@ -13,9 +25,9 @@ export default class FriendSelector extends Component {
       const friendList = friends ? <FriendList friends={friends} /> : null;
 
       return (
-        <View style={{flex: 1, flexDirection: 'row', marginTop: 10, marginBottom: 10}}>
+        <View style={styles.friendList}>
           {friendList}
         </View>
-      );
+      )
     }
 }
