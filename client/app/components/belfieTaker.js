@@ -7,7 +7,9 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+
 import Camera from 'react-native-camera';
+import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,24 +42,28 @@ export default class BelfieTaker extends Component {
 
   render() {
     return (
-      <View style={styles.belfieTaker}>
       <View style={styles.container}>
         <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
+          ref={(cam) => { this.camera = cam; }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          <Text
+            style={styles.capture}
+            onPress={this.takePicture.bind(this)}>
+            [CAPTURE]
+          </Text>
         </Camera>
-      </View>
       </View>
     )
   }
 
   takePicture() {
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        imagePath = data.path;
+        Actions.friendSelector({imagePath});
+      })
       .catch(err => console.error(err));
   }
 }

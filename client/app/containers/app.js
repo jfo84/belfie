@@ -9,8 +9,8 @@ export default class App extends Component {
     return (
       <Router>
         <Scene key="root">
-          <Scene key="belfieTaker" component={belfieTaker} title="belfieTaker" initial={true} />
-          <Scene key="friendSelector" component={friendSelector} title="friendSelector" />
+          <Scene key="belfieTaker" component={belfieTaker} title="Take a Belfie!" initial={true} />
+          <Scene key="friendSelector" component={friendSelector} title="Select a Friend!" />
         </Scene>
       </Router>
     )

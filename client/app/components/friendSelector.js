@@ -17,6 +17,7 @@ var styles = StyleSheet.create({
 
 export default class FriendSelector extends Component {
   constructor(props) {
+    debugger;
     super(props);
   }
 
