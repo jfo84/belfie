@@ -59,6 +59,7 @@ export default class BelfieTaker extends Component {
     this.camera.capture()
       .then((data) => {
         console.log(data);
+        var imagePath = data.path;
         Actions.friendSelector({imagePath});
       })
       .catch(err => console.error(err));
