@@ -12,7 +12,7 @@ import {
 
 import { RNUploader } from 'NativeModules';
 
-export default class belfieUploader extends React.Component {
+export default class belfieUploader extends Component {
   constructor(props) {
     super(props);
 
