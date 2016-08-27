@@ -1,3 +1,0 @@
-export const REQUEST_FRIEND = 'REQUEST_FRIEND';
-export const ACCEPT_FRIEND = 'ACCEPT_FRIEND';
-export const REJECT_FRIEND = 'REJECT_FRIEND';
