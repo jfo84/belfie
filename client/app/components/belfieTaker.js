@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Dimensions,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
+    width: Dimensions.get('window').width,
   },
   capture: {
     flex: 0,
@@ -31,7 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 10,
-    margin: 40
+    margin: 40,
   }
 });
 
@@ -61,7 +59,6 @@ export default class BelfieTaker extends Component {
     this.camera.capture()
       .then((data) => {
         console.log(data);
-        imagePath = data.path;
         Actions.friendSelector({imagePath});
       })
       .catch(err => console.error(err));

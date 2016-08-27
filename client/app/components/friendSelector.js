@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {
-  View,
   StyleSheet,
+  Text,
+  View,
 } from 'react-native';
+
+import { Actions } from 'react-native-router-flux';
 
 import FriendList from '../components/friendList';
 
@@ -17,18 +20,25 @@ var styles = StyleSheet.create({
 
 export default class FriendSelector extends Component {
   constructor(props) {
-    debugger;
     super(props);
   }
 
   render() {
-      const { friends } = this.props;
-      const friendList = friends ? <FriendList friends={friends} /> : null;
+    const { friends } = this.props;
+    const friendList = friends ? <FriendList friends={friends} /> : null;
 
-      return (
-        <View style={styles.friendList}>
-          {friendList}
-        </View>
-      )
-    }
+    return (
+      <View style={styles.friendList}>
+        {friendList}
+      </View>
+      <Text onPress={this.selectFriends.bind(this)}>
+        Send Your Belfie!
+      </Text>
+    )
+  }
+
+  selectFriends() {
+    let props = this.state.props;
+    Actions.belfieUploader({props});
+  }
 }
