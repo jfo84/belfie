@@ -14,6 +14,7 @@ import { RNUploader } from 'NativeModules';
 
 export default class belfieUploader extends Component {
   constructor(props) {
+    debugger;
     super(props);
 
     this.state = {
@@ -23,7 +24,7 @@ export default class belfieUploader extends Component {
       uploadTotal: 0,
       uploadWritten: 0,
       uploadStatus: undefined,
-    }
+    };
   }
 
   componentDidMount() {
@@ -94,7 +95,9 @@ export default class belfieUploader extends Component {
           <Text style={{ fontSize: 11, color: 'gray', marginTop: 5, }}>
             {(this.state.uploadWritten / 1024).toFixed(0)}/{(this.state.uploadTotal / 1024).toFixed(0)} KB
           </Text>
-          <TouchableOpacity style={[styles.button, {marginTop: 5}, ]} onPress={this._cancelUpload.bind(this)}>
+          <TouchableOpacity
+            style={[styles.button, {marginTop: 5}, ]}
+            onPress={this._cancelUpload.bind(this)}>
             <Text>{'Cancel'}</Text>
           </TouchableOpacity>
         </View>
@@ -115,12 +118,12 @@ export default class belfieUploader extends Component {
           </View>
         </Modal>
         <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', }}>
-          {this.state.images.map( (image)=>{
-            return <Image key={ _generateUUID() } source={{ uri: image.uri, }} style={styles.thumbnail} />
-          })}
+        <Image key={_generateUUID()}
+               source={{ uri: this.state.imagePath, }}
+               style={styles.thumbnail} />
         </View>
       </View>
-    );
+    )
   }
 }
 

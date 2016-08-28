@@ -12,7 +12,7 @@ export default class App extends Component {
         <Scene key="root">
           <Scene key="belfieTaker" component={belfieTaker} title="Take a Belfie!" initial={true} />
           <Scene key="friendSelector" component={friendSelector} title="Select a Friend!" />
-          <Scene key="belfieUploader" component={sentBelfies} title="Belfie Uploading..." />
+          <Scene key="belfieUploader" component={belfieUploader} title="Belfie Uploading..." />
         </Scene>
       </Router>
     )

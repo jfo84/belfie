@@ -20,6 +20,7 @@ var styles = StyleSheet.create({
 
 export default class FriendSelector extends Component {
   constructor(props) {
+    debugger;
     super(props);
   }
 
@@ -28,12 +29,14 @@ export default class FriendSelector extends Component {
     const friendList = friends ? <FriendList friends={friends} /> : null;
 
     return (
-      <View style={styles.friendList}>
-        {friendList}
+      <View>
+        <View style={styles.friendList}>
+          {friendList}
+        </View>
+        <Text onPress={this.selectFriends.bind(this)}>
+          Send Your Belfie!
+        </Text>
       </View>
-      <Text onPress={this.selectFriends.bind(this)}>
-        Send Your Belfie!
-      </Text>
     )
   }
 
