@@ -6,4 +6,8 @@ class Account < ActiveRecord::Base
   # causing all sorts of problems
   include RailsMultitenant::GlobalContextRegistry::CurrentInstance
   has_one :user
+
+  def self.current_user_id=(user_id)
+    current_id = User.find(user_id).account_id
+  end
 end
