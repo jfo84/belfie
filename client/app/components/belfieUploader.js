@@ -17,14 +17,14 @@ export default class belfieUploader extends Component {
     debugger;
     super(props);
 
-    this.state = {
+    this.setState({
       uploading: false,
       showUploadModal: false,
       uploadProgress: 0,
       uploadTotal: 0,
       uploadWritten: 0,
       uploadStatus: undefined,
-    };
+    });
   }
 
   componentDidMount() {
