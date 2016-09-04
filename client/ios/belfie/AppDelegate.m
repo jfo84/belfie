@@ -59,7 +59,7 @@
   [self.window makeKeyAndVisible];
   // return YES;
   return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                    didFinishLaunchingWithOptions:launchOptions];
+                                  didFinishLaunchingWithOptions:launchOptions];
 }
 
 // Facebook SDK
