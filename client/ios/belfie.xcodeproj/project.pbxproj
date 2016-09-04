@@ -734,6 +734,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.belfie;
 				PRODUCT_NAME = belfie;
 			};
 			name = Debug;
@@ -756,6 +757,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.belfie;
 				PRODUCT_NAME = belfie;
 			};
 			name = Release;

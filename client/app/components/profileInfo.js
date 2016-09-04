@@ -19,8 +19,9 @@ export default class ProfileInfo extends Component {
     user: React.PropTypes.object.isRequired,
   }
 
-  getInitialState() {
-    return { photo: null, };
+  constructor(props) {
+    super(props);
+    this.state = { photo: null, };
   }
 
   componentWillMount() {

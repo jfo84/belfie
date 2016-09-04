@@ -19,12 +19,14 @@ export default class ProfileImage extends Component {
     user: React.PropTypes.object.isRequired,
   }
 
-  getInitialState() {
-    return { photo: null, };
+  constructor(props) {
+    super(props);
+    this.state = { photo: null, };
   }
 
   componentWillMount() {
     var _this = this;
+    debugger;
     api.getProfileImage(this.props.user)
       .then((responseData) => {
         _this.setState({

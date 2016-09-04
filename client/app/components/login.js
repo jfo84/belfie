@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {
   View,
+  StyleSheet,
 } from 'react-native';
 
 import {
   FBLogin,
   FBLoginManager,
 } from 'react-native-facebook-login';
+
+import ProfileImage from './profileImage';
+import ProfileInfo from './profileInfo';
 
 var styles = StyleSheet.create({
   loginButton: {
@@ -25,14 +29,15 @@ var styles = StyleSheet.create({
 });
 
 export default class Login extends Component {
-  getInitialState() {
-    return { user: null, };
+  constructor(props) {
+    super(props);
+    this.state = { user: null, };
   }
 
   render() {
     var _this = this;
     var user = this.state.user;
-
+    debugger;
     return (
       <View style={styles.loginContainer}>
         { user && <ProfileImage user={user} /> }
@@ -40,11 +45,12 @@ export default class Login extends Component {
         <FBLogin style={styles.loginButton}
           permissions={["email","user_friends"]}
           onLogin={(data) => {
+            debugger;
             console.log("Logged in!");
             console.log(data);
             _this.setState({ user: data.credentials, });
           }}
-          onLogout={(){
+          onLogout={() => {
             console.log("Logged out");
             _this.setState({ user: null, });
           }}
