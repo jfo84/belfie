@@ -43,7 +43,6 @@ export default class ProfileInfo extends Component {
 
     return (
       <View style={styles.bottomBump}>
-        <Text>{ info && this.props.user.userId }</Text>
         <Text>{ info && info.name }</Text>
         <Text>{ info && info.email }</Text>
       </View>

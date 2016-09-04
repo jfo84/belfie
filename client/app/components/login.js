@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Text,
   StyleSheet,
 } from 'react-native';
 
@@ -8,6 +9,8 @@ import {
   FBLogin,
   FBLoginManager,
 } from 'react-native-facebook-login';
+
+import { Actions } from 'react-native-router-flux';
 
 import ProfileImage from './profileImage';
 import ProfileInfo from './profileInfo';
@@ -34,10 +37,23 @@ export default class Login extends Component {
     this.state = { user: null, };
   }
 
+  takeBelfies() {
+    Actions.belfieTaker(this.state.user);
+  }
+
+  renderActions() {
+    return(
+      <Text
+        onPress={this.takeBelfies.bind(this)}>
+        Take a Belfie!
+      </Text>
+    )
+  }
+
   render() {
     var _this = this;
     var user = this.state.user;
-    debugger;
+
     return (
       <View style={styles.loginContainer}>
         { user && <ProfileImage user={user} /> }
@@ -74,6 +90,7 @@ export default class Login extends Component {
             console.log("Check permissions!");
             console.log(data);
           }} />
+        { user && this.renderActions() }
       </View>
     )
   }
