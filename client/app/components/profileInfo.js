@@ -29,8 +29,8 @@ export default class ProfileInfo extends Component {
     api.getProfileInfo(this.props.user)
       .then((responseData) => {
         _this.setState({
-          info : {
-            name : responseData.name,
+          info: {
+            name: responseData.name,
             email: responseData.email,
           },
         });

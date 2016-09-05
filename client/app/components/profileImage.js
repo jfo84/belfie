@@ -26,12 +26,11 @@ export default class ProfileImage extends Component {
 
   componentWillMount() {
     var _this = this;
-    debugger;
     api.getProfileImage(this.props.user)
       .then((responseData) => {
         _this.setState({
-          photo : {
-            url : responseData.data.url,
+          photo: {
+            url: responseData.data.url,
             height: responseData.data.height,
             width: responseData.data.width,
           },
@@ -41,8 +40,8 @@ export default class ProfileImage extends Component {
   }
 
   render() {
-    if(this.state.photo == null) return this.renderLoading();
-    var photo = this.state.photo;
+    if (this.state.photo == null) return this.renderLoading();
+    var { photo } = this.state;
 
     return (
       <View style={styles.bottomBump}>

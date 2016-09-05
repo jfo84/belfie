@@ -8,11 +8,21 @@ export default class Friend extends Component {
     super(props);
   }
 
+  upload() {
+    var { name, path } = this.props;
+    Actions.belfieUploader({
+      name: name,
+      path: path,
+    });
+  }
+
   render() {
-      const { id, name } = this.props;
+      const { name } = this.props;
       return (
         <View style={{flex: 1}}>
-          {name}
+          <Text onPress={this.upload.bind(this)}>
+            {name}
+          </Text>
         </View>
       )
     }

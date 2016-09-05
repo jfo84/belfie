@@ -38,7 +38,7 @@ export default class Login extends Component {
   }
 
   takeBelfies() {
-    Actions.belfieTaker(this.state.user);
+    Actions.belfieTaker({ user: this.state.user, });
   }
 
   renderActions() {
@@ -61,7 +61,6 @@ export default class Login extends Component {
         <FBLogin style={styles.loginButton}
           permissions={["email","user_friends"]}
           onLogin={(data) => {
-            debugger;
             console.log("Logged in!");
             console.log(data);
             _this.setState({ user: data.credentials, });

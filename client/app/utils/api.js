@@ -24,6 +24,10 @@ var api = {
     var url = `https://graph.facebook.com/v2.7/${user.userId}?fields=name,email&access_token=${user.token}`;
     return fetch(url).then((res) => res.json());
   },
+  getFBFriends(user) {
+    var url = `https://graph.facebook.com/v2.7/${user.userId}/friends?access_token=${user.token}`;
+    return fetch(url).then((res) => res.json());
+  },
 };
 
 module.exports = api;

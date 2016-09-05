@@ -12,6 +12,8 @@ import {
 
 import { RNUploader } from 'NativeModules';
 
+import _generateUUID from '../utils/uuid';
+
 export default class belfieUploader extends Component {
   constructor(props) {
     debugger;
@@ -118,7 +120,7 @@ export default class belfieUploader extends Component {
           </View>
         </Modal>
         <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', }}>
-        <Image key={_generateUUID()}
+        <Image key={_generateUUID}
                source={{ uri: this.state.imagePath, }}
                style={styles.thumbnail} />
         </View>

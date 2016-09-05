@@ -44,7 +44,8 @@ export default class BelfieTaker extends Component {
         <Camera
           ref={(cam) => { this.camera = cam; }}
           style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
+          aspect={Camera.constants.Aspect.fill}
+          captureAudio={false}>
           <Text
             style={styles.capture}
             onPress={this.takePicture.bind(this)}>
@@ -56,11 +57,14 @@ export default class BelfieTaker extends Component {
   }
 
   takePicture() {
+    var _this = this;
     this.camera.capture()
       .then((data) => {
-        console.log(data);
         var imagePath = data.path;
-        Actions.friendSelector({imagePath});
+        Actions.friendSelector({
+          user: _this.props.user,
+          imagePath: imagePath,
+        });
       })
       .catch(err => console.error(err));
   }

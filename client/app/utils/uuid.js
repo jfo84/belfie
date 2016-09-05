@@ -7,3 +7,5 @@ var _generateUUID = () => {
   });
   return uuid;
 };
+
+module.exports = _generateUUID;

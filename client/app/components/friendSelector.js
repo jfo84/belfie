@@ -7,7 +7,9 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
-import FriendList from '../components/friendList';
+import Friend from '../components/friend';
+
+import api from '../utils/api';
 
 var styles = StyleSheet.create({
   friendList: {
@@ -19,29 +21,44 @@ var styles = StyleSheet.create({
 });
 
 export default class FriendSelector extends Component {
+  propTypes: {
+    user: React.PropTypes.object.isRequired,
+  }
+
   constructor(props) {
-    debugger;
     super(props);
+    this.state = { friends: null, };
+  }
+
+  componentWillMount() {
+    var _this = this;
+    api.getFBFriends(this.props.user)
+      .then((responseData) => {
+        var friends = responseData.data.map((friend) => friend.name);
+        _this.setState({ friends: friends, });
+      })
+      .done();
   }
 
   render() {
-    const { friends } = this.props;
-    const friendList = friends ? <FriendList friends={friends} /> : null;
+    if (this.state.friends == null) return this.renderLoading();
+    var { friends } = this.state;
+    var friendList = friends.map(friend => {
+      <Friend name={friend} path={this.props.imagePath} />
+    });
 
     return (
-      <View>
-        <View style={styles.friendList}>
-          {friendList}
-        </View>
-        <Text onPress={this.selectFriends.bind(this)}>
-          Send Your Belfie!
-        </Text>
+      <View style={styles.friendList}>
+        {friendList}
       </View>
     )
   }
 
-  selectFriends() {
-    let props = this.state.props;
-    Actions.belfieUploader({props});
+  renderLoading() {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
   }
 }
