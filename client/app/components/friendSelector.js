@@ -3,20 +3,21 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 
-import Friend from '../components/friend';
-
+import Friend from './friend';
+import Separator from '../helpers/separator';
 import api from '../utils/api';
 
 var styles = StyleSheet.create({
-  friendList: {
+  friendContainer: {
+    padding: 10,
+  },
+  listContainer: {
     flex: 1,
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
   },
 });
 
@@ -34,23 +35,30 @@ export default class FriendSelector extends Component {
     var _this = this;
     api.getFBFriends(this.props.user)
       .then((responseData) => {
-        var friends = responseData.data.map((friend) => friend.name);
-        _this.setState({ friends: friends, });
+        var friends = responseData.data;
+        _this.setState({ friends, });
       })
       .done();
   }
 
   render() {
     if (this.state.friends == null) return this.renderLoading();
-    var { friends } = this.state;
-    var friendList = friends.map(friend => {
-      <Friend name={friend} path={this.props.imagePath} />
+    var { friends, } = this.state;
+    var { imagePath, } = this.props;
+    var friendList = friends.map((friend, index) => {
+      return(
+        <View style={styles.friendContainer} key={index}>
+          <Friend name={friend.name}
+                  imagePath={imagePath} />
+          <Separator />
+        </View>
+      )
     });
 
     return (
-      <View style={styles.friendList}>
+      <ScrollView style={styles.listContainer}>
         {friendList}
-      </View>
+      </ScrollView>
     )
   }
 

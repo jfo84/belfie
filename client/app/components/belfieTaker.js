@@ -9,7 +9,7 @@ import {
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
