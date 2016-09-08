@@ -15,10 +15,6 @@ var styles = StyleSheet.create({
 });
 
 export default class ProfileInfo extends Component {
-  propTypes: {
-    user: React.PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.state = { photo: null, };

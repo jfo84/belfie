@@ -21,7 +21,6 @@ var styles = StyleSheet.create({
   },
   loginContainer: {
     marginTop: 150,
-
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -38,7 +37,8 @@ export default class Login extends Component {
   }
 
   takeBelfies() {
-    Actions.belfieTaker({ user: this.state.user, });
+    var { user } = this.state;
+    Actions.belfieTaker({ user });
   }
 
   renderActions() {
@@ -59,34 +59,34 @@ export default class Login extends Component {
         { user && <ProfileImage user={user} /> }
         { user && <ProfileInfo user={user} /> }
         <FBLogin style={styles.loginButton}
-          permissions={["email","user_friends"]}
+          permissions={['email','user_friends']}
           onLogin={(data) => {
-            console.log("Logged in!");
+            console.log('Logged in!');
             console.log(data);
             _this.setState({ user: data.credentials, });
           }}
           onLogout={() => {
-            console.log("Logged out");
+            console.log('Logged out');
             _this.setState({ user: null, });
           }}
           onLoginFound={(data) => {
-            console.log("Existing login found");
+            console.log('Existing login found');
             console.log(data);
             _this.setState({ user: data.credentials, });
           }}
           onLoginNotFound={() => {
-            console.log("No user logged in");
+            console.log('No user logged in');
             _this.setState({ user: null, });
           }}
           onError={(data) => {
-            console.log("Error");
+            console.log('Error');
             console.log(data);
           }}
           onCancel={() => {
-            console.log("User cancelled");
+            console.log('User cancelled');
           }}
           onPermissionsMissing={(data) => {
-            console.log("Check permissions!");
+            console.log('Check permissions!');
             console.log(data);
           }} />
         { user && this.renderActions() }

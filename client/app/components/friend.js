@@ -5,14 +5,16 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
+
 var styles = StyleSheet.create({
-  rowContainer: {
+  container: {
     padding: 10,
   },
   rowName: {
     fontSize: 16,
   },
-})
+});
 
 export default class Friend extends Component {
   constructor(props) {
@@ -20,21 +22,22 @@ export default class Friend extends Component {
   }
 
   uploadBelfie() {
-    var { name, imagePath, } = this.props;
+    var { user, friend, imagePath, } = this.props;
     Actions.belfieUploader({
-      name,
+      user,
+      friend,
       imagePath,
     });
   }
 
   render() {
-      var { name, } = this.props;
+      var { friend } = this.props;
 
       return (
-        <View style={styles.rowContainer}>
+        <View style={styles.container}>
           <Text style={styles.rowName}
                 onPress={this.uploadBelfie.bind(this)}>
-            {name}
+            {friend.name}
           </Text>
         </View>
       )

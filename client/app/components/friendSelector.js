@@ -13,19 +13,13 @@ import Separator from '../helpers/separator';
 import api from '../utils/api';
 
 var styles = StyleSheet.create({
-  friendContainer: {
-    padding: 10,
-  },
   listContainer: {
+    marginTop: 65,
     flex: 1,
   },
 });
 
 export default class FriendSelector extends Component {
-  propTypes: {
-    user: React.PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
     this.state = { friends: null, };
@@ -36,19 +30,20 @@ export default class FriendSelector extends Component {
     api.getFBFriends(this.props.user)
       .then((responseData) => {
         var friends = responseData.data;
-        _this.setState({ friends, });
+        _this.setState({ friends });
       })
       .done();
   }
 
   render() {
     if (this.state.friends == null) return this.renderLoading();
-    var { friends, } = this.state;
-    var { imagePath, } = this.props;
+    var { friends } = this.state;
+    var { user, imagePath, } = this.props;
     var friendList = friends.map((friend, index) => {
       return(
-        <View style={styles.friendContainer} key={index}>
-          <Friend name={friend.name}
+        <View key={index}>
+          <Friend user={user}
+                  friend={friend}
                   imagePath={imagePath} />
           <Separator />
         </View>

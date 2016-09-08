@@ -12,21 +12,69 @@ import {
 
 import { RNUploader } from 'NativeModules';
 
-import _generateUUID from '../utils/uuid';
+import numberUtils from '../utils/number';
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    padding: 20,
+    paddingTop: 65,
+  },
+  progressText: {
+    fontSize: 11,
+    color: 'gray',
+    marginTop: 5,
+  },
+  divider: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  thumbnail: {
+    width: 73,
+    height: 73,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    margin: 5,
+  },
+  modal: {
+    margin: 50,
+    borderWidth: 1,
+    borderColor: '#DDD',
+    padding: 20,
+    borderRadius: 12,
+    backgroundColor: 'lightyellow',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    textAlign: 'center',
+    fontWeight: '500',
+    fontSize: 14,
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: '#CCC',
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: '#EEE',
+    marginHorizontal: 5,
+  }
+});
 
 export default class belfieUploader extends Component {
   constructor(props) {
-    debugger;
     super(props);
 
-    this.setState({
+    this.state = {
       uploading: false,
       showUploadModal: false,
       uploadProgress: 0,
       uploadTotal: 0,
       uploadWritten: 0,
       uploadStatus: undefined,
-    });
+    };
   }
 
   componentDidMount() {
@@ -36,41 +84,53 @@ export default class belfieUploader extends Component {
       let progress     = data.progress;
       this.setState({ uploadProgress: progress, uploadTotal: bytesTotal, uploadWritten: bytesWritten });
     });
+
+    this.uploadImage();
+  }
+
+  generateUUID() {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
   }
 
   uploadImage() {
-    var path = this.state.imagePath;
-    var splitPath = path.split('/');
+    var { user, imagePath, } = this.props;
+    var splitPath = imagePath.split('/');
     var fileName = splitPath[splitPath.length - 1];
-    var s3Name = fileName + _generateUUID.toString();
+    var s3Name = user.id + '-' + this.generateUUID();
 
-    let files = [
+    var files = [
         {
             name: s3Name,
             filename: fileName,
-            filepath: path,
+            filepath: imagePath,
             filetype: 'image/png',
         },
     ];
-    let options = {
+
+    var options = {
         url: 'http://s3.amazonaws.com/belfie/images/',
         files: files,
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Accept': 'application/json' },
     };
 
     this.setState({ uploading: true, showUploadModal: true, });
     RNUploader.upload( options, (err, response) => {
-        if( err ){
-            console.log(err);
-            return;
+        if (err) {
+          console.log(err);
+          return;
         }
 
-        let status = response.status;
-        let responseString = response.data;
-        let json = JSON.parse(responseString);
+        var status = response.status;
+        var statusString = status === 200 ? 'Success!' : 'Failure.'
 
-        console.log('Upload complete with status ' + status);
+        console.log('Upload complete with status: ' + statusString);
     });
   }
 
@@ -94,14 +154,9 @@ export default class belfieUploader extends Component {
             style={[styles.centering, {height: 80}]}
             size="large" />
           <Text>{ this.state.uploadProgress.toFixed(0) }%</Text>
-          <Text style={{ fontSize: 11, color: 'gray', marginTop: 5, }}>
+          <Text style={styles.progressText}>
             {(this.state.uploadWritten / 1024).toFixed(0)}/{(this.state.uploadTotal / 1024).toFixed(0)} KB
           </Text>
-          <TouchableOpacity
-            style={[styles.button, {marginTop: 5}, ]}
-            onPress={this._cancelUpload.bind(this)}>
-            <Text>{'Cancel'}</Text>
-          </TouchableOpacity>
         </View>
       );
     }
@@ -119,8 +174,8 @@ export default class belfieUploader extends Component {
             { this.uploadProgressModal() }
           </View>
         </Modal>
-        <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', }}>
-        <Image key={_generateUUID}
+        <View style={styles.divider}>
+        <Image key={this.generateUUID()}
                source={{ uri: this.state.imagePath, }}
                style={styles.thumbnail} />
         </View>
